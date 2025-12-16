@@ -1,0 +1,4 @@
+node_modules
+devDependencies
+nodemon
+package-lock.json
