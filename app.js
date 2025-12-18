@@ -1,5 +1,8 @@
 import bcrypt from 'bcrypt';
 import express from 'express';
+import jwt from 'jsonwebtoken';
+
+const SECRENT_KEY_TOKEN = ''; // generat for me
 
 const app = express();
 
@@ -21,6 +24,10 @@ app.post('/login', async (req, res) => {
   if (!user) {
     res.status(404).send('Wrong username');
   }
+  
+  // const token = jwt.sign({username: user.username}, SECRENT_KEY_TOKEN, {expiresIn: '1h'});
+  var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
+  console.log(token);
   const isValid = await bcrypt.compare(password, user.password);
   if (!isValid) {
     res.status(401).send('Wrong password');
